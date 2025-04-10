@@ -1,0 +1,35 @@
+{
+  "name": "php-inline-sql-formatter",
+  "displayName": "PHP Inline SQL Formatter",
+  "description": "Format inline SQL queries in PHP files.",
+  "version": "0.0.8",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.formatSqlInPhp",
+        "title": "Format SQL in PHP Line"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@vscode/vsce": "^3.3.2",
+    "typescript": "^5.8.3",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "sql-formatter": "^15.5.2"
+  }
+}
