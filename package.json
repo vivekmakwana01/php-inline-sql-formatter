@@ -6,6 +6,10 @@
   "engines": {
     "vscode": "^1.75.0"
   },
+  "repository": {
+    "url": "https://github.com/vivekmakwana01/php-inline-sql-formatter",
+    "type": "git"
+  },
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
