@@ -3,6 +3,7 @@
   "displayName": "PHP Inline SQL Formatter",
   "description": "Format inline SQL queries in PHP files.",
   "version": "0.0.8",
+  "publisher": "vivekmakwana01",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -25,7 +26,10 @@
     "vscode:prepublish": "npm run compile"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vivek Makwana <vivekmakwana01@gmail.com>",
+  "categories": [
+    "Formatters"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@types/vscode": "^1.75.0",

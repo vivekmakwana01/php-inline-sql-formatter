@@ -19,7 +19,7 @@ A simple VSCode extension to format inline SQL queries written as strings in PHP
 ### Before
 
 ```php
-$select = "select id, name from users where active = 1 order by id desc";
+$select = "SELECT id, name FROM users WHERE active = 1 ORDER BY id DESC";
 ```
 
 ## Commands to build
