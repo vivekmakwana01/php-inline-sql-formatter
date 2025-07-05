@@ -1,22 +1,30 @@
-# PHP Inline SQL Formatter
+# SQL Formatter for PHP
 
-A simple VSCode extension to format inline SQL queries written as strings in PHP files.
+A lightweight Visual Studio Code extension that formats SQL queries inside PHP string assignments.
 
-## Features
+Perfect for PHP developers who write long SQL queries and want clean formatting without breaking embedded variables like `{$var}`.
 
-- Detects SQL queries in PHP string assignments
-- Uses `sql-formatter` to format SQL
-- Works on selected line via command palette
+---
 
-## Usage
+## ✨ Features
 
-1. Open a PHP file with inline SQL.
-2. Place the cursor on the line with the SQL string.
-3. Open Command Palette (`Ctrl+Shift+P`), run **Format SQL in PHP Line**.
+- ✅ Format SQL assigned to PHP variables like `$sql = "..."` or `$query = '...'`
+- ✅ Supports **multi-line SQL strings**
+- ✅ Respects your editor's **indentation settings** (tabs or spaces)
+- ✅ Automatically **preserves curly-brace variables** like `{$table_name}`
+- ✅ Safe and smart re-indentation after formatting
 
-## Example
+---
 
-### Before
+## 📸 Demo
+
+> Coming soon! 
+
+---
+
+## 🚀 How to Use
+
+1. Select the line (or lines) containing your SQL string inside PHP code:
 
 ```php
 $select = "SELECT id, name FROM users WHERE active = 1 ORDER BY id DESC";
