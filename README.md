@@ -2,7 +2,7 @@
 
 A lightweight Visual Studio Code extension that formats SQL queries inside PHP string assignments.
 
-Perfect for PHP developers who write long SQL queries and want clean formatting without breaking embedded variables like `{$var}`.
+Perfect for PHP developers who write long SQL queries and want clean formatting.
 
 ---
 
