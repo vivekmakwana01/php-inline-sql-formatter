@@ -2,7 +2,7 @@
   "name": "php-inline-sql-formatter",
   "displayName": "PHP Inline SQL Formatter",
   "description": "Format inline SQL queries in PHP files.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "publisher": "vivekmakwana01",
   "engines": {
     "vscode": "^1.75.0"
