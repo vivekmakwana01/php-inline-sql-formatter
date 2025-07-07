@@ -23,15 +23,36 @@ export function activate(context: vscode.ExtensionContext) {
 
         console.log("selected ==> ", selectedLineText);
 
-        // Match SQL in string (double or single quotes)
-        const match = selectedLineText.match(/=\s*(["'])([\s\S]+?)\1;/m);
-        if (match && match[2]) {
-            const quote = match[1];
-            let sql = match[2];
+        let sql = '';
+        let quote: string | null = null;
+        let prefix = '';
+        let suffix = '';
 
+        const phpMatch = selectedLineText.match(/^(.*?)=\s*(["'])([\s\S]+?)\2;?$/m);
+        if (phpMatch) {
+            console.log("phpMatch ==> ", phpMatch);
+            quote = phpMatch[2]; 
+            sql = phpMatch[3];
+            prefix = phpMatch[1] + '= ' + quote + '\n';
+            suffix = quote + ';';
+        } else {
+            console.log("else ==> ");
+            const quoteMatch = selectedLineText.match(/^["']([\s\S]+?)["']$/m);
+            if (quoteMatch) {
+                sql = quoteMatch[1];
+                quote = selectedLineText[0];
+                prefix = quote + '\n';
+                suffix = quote + ';';
+            } else {
+                sql = selectedLineText.trim();
+                prefix = '\r';
+                suffix = '';
+            }
+        }
+
+        if (sql !== '') {
             console.log('Detected SQL:', sql);
 
-            // Step 1: Replace {$var} with placeholders
             const varMap: Record<string, string> = {};
             let varIndex = 0;
             sql = sql.replace(/\{\$[a-zA-Z0-9_]+\}/g, (match) => {
@@ -40,7 +61,6 @@ export function activate(context: vscode.ExtensionContext) {
                 return key;
             });
 
-            // Step 2: Format using sql-formatter
             const formattedSql = format(sql, {
                 language: 'sql',
                 keywordCase: 'upper',
@@ -50,14 +70,12 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             });
 
-            // Step 3: Restore original curly-brace variables
             const restoredSql = Object.entries(varMap).reduce((sql, [key, original]) => {
                 return sql.replace(new RegExp(key, 'g'), original);
             }, formattedSql);
 
             console.log('Formatted SQL:', restoredSql);
 
-            // Step 4: Rebuild PHP line with indentation
             const baseIndent = selectedLineText.match(/^(\s*)/)?.[1] || '';
             const extraIndent = useTabs ? '\t' : ' '.repeat(tabSize);
 
@@ -66,7 +84,9 @@ export function activate(context: vscode.ExtensionContext) {
                 .map(line => baseIndent + extraIndent + line)
                 .join('\n') + '\n' + baseIndent;
 
-            const newPhp = `${selectedLineText.split('=')[0]}= ${quote}\n${indentedSql}${quote};`;
+            console.log('Indented SQL:', indentedSql);
+
+            const newPhp = `${prefix}${indentedSql}${suffix}`;
 
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, newPhp);
